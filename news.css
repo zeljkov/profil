@@ -1,0 +1,185 @@
+/* Hacker News stylesheet + dark theme (after jgthms.com/hacker-news-dark-mode) */
+:root {
+  --blue-h: 227;
+  --blue-s: 10%;
+
+  --black: #000000;
+  --dark-grey: #222;
+  --light-grey: #828282;
+  --lightest-grey: #eee;
+  --white: #ffffff;
+  --orange: #ff6600;
+  --beige: #f6f6ef;
+
+  /* dark mode steps, spread apart so each layer reads clearly */
+  --darkest-blue: hsl(var(--blue-h), 12%, 5.7%);
+  --dark-blue: hsl(var(--blue-h), 12%, 9.45%);
+  --blue: hsl(var(--blue-h), 18%, 28.69%);
+  --light-blue: hsl(var(--blue-h), 14%, 68.13%);
+
+  --page-background: var(--white);
+  --accent: var(--orange);
+  --text: var(--light-grey);
+  --text-strong: var(--black);
+  --border: var(--dark-grey);
+  --background: var(--beige);
+  --input-background: var(--white);
+  --input-border: var(--lightest-grey);
+  --arrow: #9a9a9a;
+}
+
+:root[data-theme="dark"] {
+  --page-background: var(--darkest-blue);
+  --accent: var(--blue);
+  --text: var(--light-blue);
+  --text-strong: #ffffff;
+  --border: hsl(var(--blue-h), 14%, 70.35%);
+  --background: var(--dark-blue);
+  --input-background: var(--darkest-blue);
+  --input-border: var(--accent);
+  --arrow: hsl(var(--blue-h), 12%, 52.11%);
+}
+
+html  { background-color: var(--page-background);
+        scrollbar-gutter: stable; /* reserve the scrollbar's space on every page so short pages (profile) don't widen the bar */ }
+body  { font-family: Verdana, Geneva, sans-serif; font-size: 12pt; color: var(--text);
+        -webkit-text-size-adjust: 100%; text-size-adjust: 100%; /* stop iOS enlarging text in landscape */ }
+td    { font-family: Verdana, Geneva, sans-serif; font-size: 12pt; color: var(--text); }
+
+input { font-family: monospace; font-size: 12pt; }
+
+/* content links are underlined so they read as clickable */
+a:link    { color: var(--text-strong); text-decoration: underline; text-underline-offset: 2px; }
+a:visited { color: var(--text); text-decoration: underline; text-underline-offset: 2px; }
+/* except the top bar and the footer, which stay plain like HN */
+.pagetop a:link, .pagetop a:visited, .yclinks a:link, .yclinks a:visited { text-decoration: none; }
+
+#hnmain  { background-color: var(--background); min-width: 796px; }
+/* narrow windows the mobile layout doesn't cover (751–850px, under 300px): drop the min width so there's no sideways scroll */
+@media only screen and (max-width: 850px) { #hnmain { min-width: 0; } }
+#header  { background-color: var(--accent); }
+
+.title   { font-family: Verdana, Geneva, sans-serif; font-size: 12pt; color: var(--text); }
+.subtext { font-family: Verdana, Geneva, sans-serif; font-size: 8.4pt; color: var(--text); }
+.yclinks { font-family: Verdana, Geneva, sans-serif; font-size: 9.6pt; color: var(--text); }
+.pagetop { font-family: Verdana, Geneva, sans-serif; font-size: 12pt; color: var(--border); }
+.comhead { font-family: Verdana, Geneva, sans-serif; font-size: 9.6pt; color: var(--text); }
+.comment { font-family: Verdana, Geneva, sans-serif; font-size: 10.8pt; color: var(--text-strong); }
+.hnname  { margin-right: 14px; }
+
+.comment p { margin-top: 8px; margin-bottom: 0; }
+
+.pagetop a:link, .pagetop a:visited { color: var(--text-strong); }
+/* dark: like HN, unselected nav links are muted and the current page is white */
+:root[data-theme="dark"] .pagetop a:link,
+:root[data-theme="dark"] .pagetop a:visited { color: var(--border); }
+:root[data-theme="dark"] .hnname a:link,
+:root[data-theme="dark"] .hnname a:visited { color: var(--text-strong); }
+:root:not([data-theme="dark"]) .pagetop a:link,
+:root:not([data-theme="dark"]) .pagetop a:visited { color: #000; }
+.topsel a:link, .topsel a:visited { color: #ffffff !important; }
+
+.subtext a:link, .subtext a:visited { color: var(--text); }
+.comhead a:link, .comhead a:visited { color: var(--text); }
+.yclinks a:link, .yclinks a:visited { color: var(--text-strong); }
+
+
+/* upvote arrow drawn in CSS (no external gif) */
+.votearrow {
+  width: 0; height: 0;
+  /* HN proportions: smaller than the rank digits, inside their height, 1px above the baseline */
+  border-left: 5.5px solid transparent;
+  border-right: 5.5px solid transparent;
+  border-bottom: 10px solid var(--arrow);
+  margin: 6px 5px 5px 2px; /* 2px gap from the rank dot, 5px to the title, as HN */
+}
+.comment-tree .votearrow { margin-top: 8px; }
+
+.rank { white-space: nowrap; }
+.theme-toggle { cursor: pointer; white-space: nowrap; }
+
+/* item / profile pages */
+.fatitem td { vertical-align: top; }
+.toptext { color: var(--text-strong); font-size: 10.8pt; line-height: 1.45; }
+.toptext p { margin: 8px 0 0; }
+.profile td { padding: 2px 0; }
+.profile td:first-child { padding-right: 8px; white-space: nowrap; }
+/* desktop: values start under the "projects" nav link */
+@media only screen and (min-width: 751px) { .profile td:first-child { width: 175.8px; text-align: center; } }
+.comment-tree .ind { width: 0; }
+.comment-tree .default { padding-bottom: 14px; }
+.comment-tree ul { margin: 4px 0 0; padding-left: 18px; }
+.comment-tree li { margin: 2px 0; }
+
+/* mobile device */
+@media only screen and (min-width: 300px) and (max-width: 750px) {
+  #hnmain { width: 100%; min-width: 0; }
+  body { padding: 0; margin: 0; width: 100%; }
+  td { height: inherit !important; }
+  .title, .comment { font-size: inherit; }
+  span.pagetop { display: block; margin: 3px 5px; font-size: 14.4px; line-height: normal; }
+  span.pagetop b { display: block; font-size: 18px; }
+  table.comment-tree .comment a { display: inline-block; max-width: 200px; overflow: hidden; white-space: nowrap;
+    text-overflow: ellipsis; vertical-align: top; text-indent: 0; }
+  .title { font-size: 13.2pt; line-height: 16.8pt; }
+  .subtext { font-size: 10.8pt; }
+  .itemlist { padding-right: 5px; }
+  .votearrow { transform: scale(1.1, 1.1); margin-top: 7.5px; margin-right: 6px; }
+  .comment-tree .votearrow { margin-top: 7.5px; }
+  .votelinks { min-width: 18px; }
+  .votelinks a { display: block; margin-bottom: 9px; }
+  .comment-tree .indent[style*="width:40px"] { width: 12px !important; }
+}
+
+/* as on HN: comments cap their width per breakpoint; long words wrap */
+.comment { max-width: 1215px; overflow-wrap: anywhere; }
+.toptext { overflow-wrap: anywhere; }
+.profile td, .subtext, .titleline { overflow-wrap: anywhere; }
+
+@media only screen and (min-width: 300px) and (max-width: 389px)   { .comment { max-width: 270px;  overflow: hidden; } }
+@media only screen and (min-width: 390px) and (max-width: 509px)   { .comment { max-width: 350px;  overflow: hidden; } }
+@media only screen and (min-width: 510px) and (max-width: 599px)   { .comment { max-width: 460px;  overflow: hidden; } }
+@media only screen and (min-width: 600px) and (max-width: 689px)   { .comment { max-width: 540px;  overflow: hidden; } }
+@media only screen and (min-width: 690px) and (max-width: 809px)   { .comment { max-width: 620px;  overflow: hidden; } }
+@media only screen and (min-width: 810px) and (max-width: 899px)   { .comment { max-width: 730px;  overflow: hidden; } }
+@media only screen and (min-width: 900px) and (max-width: 1079px)  { .comment { max-width: 810px;  overflow: hidden; } }
+@media only screen and (min-width: 1080px) and (max-width: 1169px) { .comment { max-width: 970px;  overflow: hidden; } }
+@media only screen and (min-width: 1170px) and (max-width: 1259px) { .comment { max-width: 1050px; overflow: hidden; } }
+@media only screen and (min-width: 1260px) and (max-width: 1349px) { .comment { max-width: 1130px; overflow: hidden; } }
+
+/* HN comment details */
+.commtext { color: var(--text-strong); }
+a:focus-visible, input:focus-visible { outline: 1px dotted var(--text-strong); outline-offset: 1px; }
+
+/* projects page: each company is a group, its projects listed inside */
+.comment-tree ul.projects { list-style: none; padding-left: 0; margin: 0; }
+.comment-tree ul.projects li { margin: 0 0 9px; }
+.comment-tree ul.projects li:last-child { margin-bottom: 0; }
+/* company line reads as the heading of its group */
+.comhead.company { font-size: 10.8pt; color: var(--text-strong); font-weight: bold; }
+.comhead.company a:link, .comhead.company a:visited { color: var(--text-strong); }
+/* projects page: fixed spacing so each company name starts exactly under "Željko Vulović"
+   (header: 2px table padding + 24px logo cell + 16px gap = 42px; mobile adds the 5px pagetop margin = 47px).
+   The arrow keeps its 9px gap to the text and sits just left of it. */
+.projects-tree, .projects-tree table { border-spacing: 0; }
+.projects-tree td { padding: 0; }
+.projects-tree .ind { padding-left: 0; }
+.projects-tree .votelinks { width: 42px; min-width: 42px; }
+/* arrow: centred in the gap between the logo and the name, its base on the top edge of the title underline */
+.projects-tree .votearrow { margin-left: auto; margin-right: 2.5px; margin-top: 10px; }
+@media only screen and (min-width: 300px) and (max-width: 750px) {
+  .projects-tree .votelinks { width: 47px; min-width: 47px; }
+  .projects-tree .votearrow { margin-right: 5px; margin-top: 9.5px; }
+}
+/* projects page: a dash before each project, a dot only before clients; wrapped lines stay aligned with the text */
+.comment-tree ul.projects li { padding-left: 1em; text-indent: -1em; }
+.comment-tree ul.projects li::before { content: "–"; display: inline-block; width: 1em; text-indent: 0; }
+.comment-tree ul.projects li.client::before { content: "•"; }
+/* projects page: client → project nesting, a dash before each project */
+.comment-tree ul.projects ul { list-style: none; padding-left: 0; margin: 3px 0 0; }
+.comment-tree ul.projects ul li { margin: 0 0 3px; }
+.comment-tree ul.projects ul li::before { content: "–"; }
+/* projects page: domain links in brackets behave like normal links (black, grey once visited) */
+.comment-tree ul.projects .comhead a:link    { color: var(--text-strong); }
+.comment-tree ul.projects .comhead a:visited { color: var(--text); }
+.comment-tree ul.projects .comhead { color: var(--text-strong); }
