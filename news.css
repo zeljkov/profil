@@ -93,7 +93,14 @@ a:visited { color: var(--text); text-decoration: underline; text-underline-offse
   border-bottom: 10px solid var(--arrow);
   margin: 6px 5px 5px 2px; /* 2px gap from the rank dot, 5px to the title, as HN */
 }
-.comment-tree .votearrow { margin-top: 8px; }
+/* every page: the arrow's base sits on the top edge of the title underline (2px under the baseline) */
+.comment-tree .votearrow { margin-top: 10px; }
+/* every page: the text starts on the line of the logo's right edge (2px header padding + 24px logo = 26px),
+   the arrow points at the logo's centre (14px); horizontal cell spacing removed, vertical spacing kept */
+.comment-tree:not(.projects-tree), .comment-tree:not(.projects-tree) table { border-spacing: 0 2px; }
+.comment-tree:not(.projects-tree) td { padding-left: 0; padding-right: 0; }
+.comment-tree .votelinks { width: 26px; min-width: 26px; }
+.comment-tree .votearrow { margin-left: auto; margin-right: 7px; }
 
 .rank { white-space: nowrap; }
 .theme-toggle { cursor: pointer; white-space: nowrap; }
@@ -119,13 +126,11 @@ a:visited { color: var(--text); text-decoration: underline; text-underline-offse
   .title, .comment { font-size: inherit; }
   span.pagetop { display: block; margin: 3px 5px; font-size: 14.4px; line-height: normal; }
   span.pagetop b { display: block; font-size: 18px; }
-  table.comment-tree .comment a { display: inline-block; max-width: 200px; overflow: hidden; white-space: nowrap;
-    text-overflow: ellipsis; vertical-align: top; text-indent: 0; }
   .title { font-size: 13.2pt; line-height: 16.8pt; }
   .subtext { font-size: 10.8pt; }
   .itemlist { padding-right: 5px; }
   .votearrow { transform: scale(1.1, 1.1); margin-top: 7.5px; margin-right: 6px; }
-  .comment-tree .votearrow { margin-top: 7.5px; }
+  .comment-tree .votearrow { margin-top: 9.5px; }
   .votelinks { min-width: 18px; }
   .votelinks a { display: block; margin-bottom: 9px; }
   .comment-tree .indent[style*="width:40px"] { width: 12px !important; }
@@ -158,19 +163,10 @@ a:focus-visible, input:focus-visible { outline: 1px dotted var(--text-strong); o
 /* company line reads as the heading of its group */
 .comhead.company { font-size: 10.8pt; color: var(--text-strong); font-weight: bold; }
 .comhead.company a:link, .comhead.company a:visited { color: var(--text-strong); }
-/* projects page: fixed spacing so each company name starts exactly under "Željko Vulović"
-   (header: 2px table padding + 24px logo cell + 16px gap = 42px; mobile adds the 5px pagetop margin = 47px).
-   The arrow keeps its 9px gap to the text and sits just left of it. */
+/* projects page: fixed spacing (no cell padding or spacing) */
 .projects-tree, .projects-tree table { border-spacing: 0; }
 .projects-tree td { padding: 0; }
 .projects-tree .ind { padding-left: 0; }
-.projects-tree .votelinks { width: 42px; min-width: 42px; }
-/* arrow: centred in the gap between the logo and the name, its base on the top edge of the title underline */
-.projects-tree .votearrow { margin-left: auto; margin-right: 2.5px; margin-top: 10px; }
-@media only screen and (min-width: 300px) and (max-width: 750px) {
-  .projects-tree .votelinks { width: 47px; min-width: 47px; }
-  .projects-tree .votearrow { margin-right: 5px; margin-top: 9.5px; }
-}
 /* projects page: a dash before each project, a dot only before clients; wrapped lines stay aligned with the text */
 .comment-tree ul.projects li { padding-left: 1em; text-indent: -1em; }
 .comment-tree ul.projects li::before { content: "–"; display: inline-block; width: 1em; text-indent: 0; }
@@ -183,3 +179,9 @@ a:focus-visible, input:focus-visible { outline: 1px dotted var(--text-strong); o
 .comment-tree ul.projects .comhead a:link    { color: var(--text-strong); }
 .comment-tree ul.projects .comhead a:visited { color: var(--text); }
 .comment-tree ul.projects .comhead { color: var(--text-strong); }
+
+/* every page: the same gap from the bar to the top of the first line of text as on logline
+   (projects loses 6px with its zero cell spacing, profile sits 5px higher, resume's smaller first line sits 1px lower) */
+.projects-tree { margin-top: 6px; }
+.profile { margin-top: 5px; }
+#comments { margin-top: -1px; }
