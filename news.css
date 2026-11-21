@@ -97,8 +97,8 @@ a:visited { color: var(--text); text-decoration: underline; text-underline-offse
 .comment-tree .votearrow { margin-top: 10px; }
 /* every page: the text starts on the line of the logo's right edge (2px header padding + 24px logo = 26px),
    the arrow points at the logo's centre (14px); horizontal cell spacing removed, vertical spacing kept */
-.comment-tree:not(.projects-tree), .comment-tree:not(.projects-tree) table { border-spacing: 0 2px; }
-.comment-tree:not(.projects-tree) td { padding-left: 0; padding-right: 0; }
+.comment-tree:not(.records-tree), .comment-tree:not(.records-tree) table { border-spacing: 0 2px; }
+.comment-tree:not(.records-tree) td { padding-left: 0; padding-right: 0; }
 .comment-tree .votelinks { width: 26px; min-width: 26px; }
 .comment-tree .votearrow { margin-left: auto; margin-right: 7px; }
 
@@ -111,7 +111,7 @@ a:visited { color: var(--text); text-decoration: underline; text-underline-offse
 .toptext p { margin: 8px 0 0; }
 .profile td { padding: 2px 0; }
 .profile td:first-child { padding-right: 8px; white-space: nowrap; }
-/* desktop: values start under the "projects" nav link */
+/* desktop: values start under the "records" nav link */
 @media only screen and (min-width: 751px) { .profile td:first-child { width: 175.8px; text-align: center; } }
 .comment-tree .ind { width: 0; }
 .comment-tree .default { padding-bottom: 14px; }
@@ -156,32 +156,36 @@ a:visited { color: var(--text); text-decoration: underline; text-underline-offse
 .commtext { color: var(--text-strong); }
 a:focus-visible, input:focus-visible { outline: 1px dotted var(--text-strong); outline-offset: 1px; }
 
-/* projects page: each company is a group, its projects listed inside */
+/* records page: each company is a group, its projects listed inside */
 .comment-tree ul.projects { list-style: none; padding-left: 0; margin: 0; }
 .comment-tree ul.projects li { margin: 0 0 9px; }
 .comment-tree ul.projects li:last-child { margin-bottom: 0; }
 /* company line reads as the heading of its group */
 .comhead.company { font-size: 10.8pt; color: var(--text-strong); font-weight: bold; }
 .comhead.company a:link, .comhead.company a:visited { color: var(--text-strong); }
-/* projects page: fixed spacing (no cell padding or spacing) */
-.projects-tree, .projects-tree table { border-spacing: 0; }
-.projects-tree td { padding: 0; }
-.projects-tree .ind { padding-left: 0; }
-/* projects page: a dash before each project, a dot only before clients; wrapped lines stay aligned with the text */
+/* records page: fixed spacing (no cell padding or spacing) */
+.records-tree, .records-tree table { border-spacing: 0; }
+.records-tree td { padding: 0; }
+.records-tree .ind { padding-left: 0; }
+/* records page: a dash before each project, a dot only before clients; wrapped lines stay aligned with the text */
 .comment-tree ul.projects li { padding-left: 1em; text-indent: -1em; }
 .comment-tree ul.projects li::before { content: "–"; display: inline-block; width: 1em; text-indent: 0; }
 .comment-tree ul.projects li.client::before { content: "•"; }
-/* projects page: client → project nesting, a dash before each project */
+/* records page: client → project nesting, a dash before each project */
 .comment-tree ul.projects ul { list-style: none; padding-left: 0; margin: 3px 0 0; }
 .comment-tree ul.projects ul li { margin: 0 0 3px; }
 .comment-tree ul.projects ul li::before { content: "–"; }
-/* projects page: domain links in brackets behave like normal links (black, grey once visited) */
+/* records page: domain links in brackets behave like normal links (black, grey once visited) */
 .comment-tree ul.projects .comhead a:link    { color: var(--text-strong); }
 .comment-tree ul.projects .comhead a:visited { color: var(--text); }
 .comment-tree ul.projects .comhead { color: var(--text-strong); }
 
 /* every page: the same gap from the bar to the top of the first line of text as on logline
-   (projects loses 6px with its zero cell spacing, profile sits 5px higher, resume's smaller first line sits 1px lower) */
-.projects-tree { margin-top: 6px; }
+   (records loses 6px with its zero cell spacing, profile sits 5px higher, resume's smaller first line sits 1px lower) */
+.records-tree { margin-top: 6px; }
 .profile { margin-top: 5px; }
 #comments { margin-top: -1px; }
+/* every page: the same gap from the last line of text to the bottom bar as on logline and resume */
+.records-tree { margin-bottom: 5px; }
+.profile { margin-bottom: 15px; }
+.comment-tree .default:has(.commtext:empty) { padding-bottom: 5px; }
